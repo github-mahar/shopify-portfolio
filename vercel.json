@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/((?!assets/|google9c75dde692f1a533\\.html|robots\\.txt|sitemap\\.xml|favicon\\..*|og-image\\..*|icons\\.svg|shopify-partner-logo\\.svg).*)",
-      "destination": "/index.html"
-    }
-  ]
-}
-
