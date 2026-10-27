@@ -15,7 +15,6 @@ export const OverviewPage: React.FC = () => {
   // Sidekick interactive input state
   const [sidekickQuery, setSidekickQuery] = useState('');
   const [sidekickAnswer, setSidekickAnswer] = useState<string | null>(null);
-  const [setupGuideOpen, setSetupGuideOpen] = useState(true);
 
   const handleSidekickSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -191,10 +190,10 @@ export const OverviewPage: React.FC = () => {
         <div className="sidekick-prompt-pills">
           <button
             type="button"
-            className="prompt-pill active-pill"
+            className="prompt-pill"
             onClick={() => navigate('/about')}
           >
-            <span>👤 About GM</span>
+            <span>About GM</span>
           </button>
 
           <button
@@ -256,100 +255,6 @@ export const OverviewPage: React.FC = () => {
           <p className="sidekick-answer-text">{sidekickAnswer}</p>
         </div>
       )}
-
-      {/* Authentic Shopify Admin Setup Guide Card */}
-      <section style={{ maxWidth: '1160px', margin: '0 auto 20px auto', padding: '0 24px' }}>
-        <div className="shopify-setup-guide-card">
-          <div className="setup-guide-header">
-            <div className="setup-guide-header-left">
-              <div className="setup-guide-title-row">
-                <span className="setup-guide-title">Setup guide</span>
-                <span className="setup-guide-counter">4 of 4 completed</span>
-              </div>
-              <p className="setup-guide-desc">
-                Verified Shopify 2.0 theme engineering, checkout integrations, and automated order flows by GM (EzzCode).
-              </p>
-            </div>
-            <button
-              type="button"
-              className="setup-guide-toggle-btn"
-              onClick={() => setSetupGuideOpen(!setupGuideOpen)}
-              aria-label="Toggle setup guide"
-            >
-              {setupGuideOpen ? 'Hide guide ▴' : 'Show guide ▾'}
-            </button>
-          </div>
-
-          <div className="setup-guide-progress-track">
-            <div className="setup-guide-progress-bar" style={{ width: '100%' }} />
-          </div>
-
-          {setupGuideOpen && (
-            <div className="setup-guide-task-list">
-              <div className="setup-guide-task-item" onClick={() => navigate('/themes')}>
-                <div className="setup-guide-check-circle">✓</div>
-                <div className="setup-guide-task-body">
-                  <div className="setup-guide-task-name">Build &amp; sell commercial Shopify 2.0 theme</div>
-                  <div className="setup-guide-task-sub">
-                    Engineered MAEVEN theme with clean Liquid schemas, responsive collection filters, and native cart drawer.
-                  </div>
-                </div>
-                <span className="setup-guide-task-tag">MAEVEN OS 2.0</span>
-              </div>
-
-              <div className="setup-guide-task-item" onClick={() => navigate('/projects')}>
-                <div className="setup-guide-check-circle">✓</div>
-                <div className="setup-guide-task-body">
-                  <div className="setup-guide-task-name">Maintain high-volume catalog architecture with zero downtime</div>
-                  <div className="setup-guide-task-sub">
-                    Front-end architecture and multi-region checkout management for Imrozia Serene storefront.
-                  </div>
-                </div>
-                <span className="setup-guide-task-tag">Imrozia Serene</span>
-              </div>
-
-              <div className="setup-guide-task-item" onClick={() => navigate('/integrations')}>
-                <div className="setup-guide-check-circle">✓</div>
-                <div className="setup-guide-task-body">
-                  <div className="setup-guide-task-name">Integrate regional payment gateways &amp; callbacks</div>
-                  <div className="setup-guide-task-sub">
-                    Zero-failure regional card transactions, webhook callback validation, and rule-based checkout routing.
-                  </div>
-                </div>
-                <span className="setup-guide-task-tag">Gateways</span>
-              </div>
-
-              <div className="setup-guide-task-item" onClick={() => navigate('/integrations')}>
-                <div className="setup-guide-check-circle">✓</div>
-                <div className="setup-guide-task-body">
-                  <div className="setup-guide-task-name">Automate Cash on Delivery order verification</div>
-                  <div className="setup-guide-task-sub">
-                    Make.com scenarios automating 500+ weekly COD orders, eliminating 80%+ manual confirmation calls.
-                  </div>
-                </div>
-                <span className="setup-guide-task-tag">Make.com COD</span>
-              </div>
-
-              <div className="setup-guide-actions-row">
-                <button
-                  type="button"
-                  className="shopify-card-action-btn"
-                  onClick={() => navigate('/about')}
-                >
-                  View Developer Profile
-                </button>
-                <button
-                  type="button"
-                  className="shopify-card-action-btn"
-                  onClick={() => navigate('/contact')}
-                >
-                  Scope a Project
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* 3 Cards Grid (Recreating screenshot cards with generated 3D assets) */}
       <section className="shopify-cards-grid">

@@ -185,7 +185,7 @@ export const PORTFOLIO_CONTENT: ContentConfig = {
     tagline:
       'Engineering clean Shopify 2.0 storefronts, modular Liquid sections, and automated workflows under the brand EzzCode.',
     bioIntro:
-      "Hi! I'm Mahar Ghulam Muhammad (known as GM). I'm a specialized Shopify Front-End Developer and founder of EzzCode. I focus 100% on the Shopify ecosystem — engineering lightweight Online Store 2.0 themes, writing clean Liquid markup, integrating regional payment gateways, and streamlining back-office operations using Make.com webhooks and automations.",
+      "Hi! I'm Mahar Ghulam Muhammad. I'm a specialized Shopify Front-End Developer and founder of EzzCode. I focus 100% on the Shopify ecosystem — engineering lightweight Online Store 2.0 themes, writing clean Liquid markup, integrating regional payment gateways, and streamlining back-office operations using Make.com webhooks and automations.",
     bioFull: [
       "My journey in e-commerce web development started with a clear observation: too many Shopify stores suffer from bloated apps, sluggish load speeds, and messy theme code that makes simple edits a nightmare for merchants. I decided to dedicate myself to mastering Shopify's core architecture — Liquid, JSON templates, section schemas, and native APIs.",
       'I engineered and launched MAEVEN, an Online Store 2.0 commercial theme built completely from scratch with zero third-party app dependencies, modular drag-and-drop sections, and a native slide-out cart drawer, which has been sold directly to retail merchants on Gumroad.',
