@@ -1,5 +1,10 @@
 export type {
   DeveloperProfile,
+  AboutMeData,
+  AboutMeSpecialty,
+  AboutMeSkillCategory,
+  AboutMeTimelineItem,
+  AboutMeValueItem,
   ProjectItem,
   IntegrationItem,
   ServiceItem,

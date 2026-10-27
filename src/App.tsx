@@ -6,6 +6,7 @@ import type { LinkLikeComponentProps } from '@shopify/polaris/build/ts/src/utili
 
 import { AdminShell } from './components/AdminShell';
 import { OverviewPage } from './pages/OverviewPage';
+import { AboutPage } from './pages/AboutPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { IntegrationsPage } from './pages/IntegrationsPage';
 import { ThemesPage } from './pages/ThemesPage';
@@ -44,6 +45,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<AdminShell />}>
             <Route index element={<OverviewPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="profile" element={<Navigate to="/about" replace />} />
+            <Route path="customers" element={<Navigate to="/about" replace />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="integrations" element={<IntegrationsPage />} />
             <Route path="apps" element={<Navigate to="/integrations" replace />} />

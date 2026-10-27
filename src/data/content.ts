@@ -65,12 +65,55 @@ export interface TestimonialItem {
   avatarInitials: string;
 }
 
+export interface AboutMeSpecialty {
+  title: string;
+  badge: string;
+  description: string;
+}
+
+export interface AboutMeSkillCategory {
+  category: string;
+  skills: string[];
+}
+
+export interface AboutMeTimelineItem {
+  period: string;
+  role: string;
+  company: string;
+  highlight: string;
+  details: string[];
+}
+
+export interface AboutMeValueItem {
+  title: string;
+  description: string;
+}
+
+export interface AboutMeData {
+  headline: string;
+  subheadline: string;
+  tagline: string;
+  bioIntro: string;
+  bioFull: string[];
+  quickStats: {
+    label: string;
+    value: string;
+    detail: string;
+  }[];
+  specialties: AboutMeSpecialty[];
+  skillCategories: AboutMeSkillCategory[];
+  experienceTimeline: AboutMeTimelineItem[];
+  whyWorkWithMe: AboutMeValueItem[];
+  workingPrinciples: string[];
+}
+
 export interface ContentConfig {
   flags: {
     showImroziaSerene: boolean;
     showTestimonials: boolean;
   };
   developer: DeveloperProfile;
+  aboutMe: AboutMeData;
   overviewStats: {
     label: string;
     value: string;
@@ -134,6 +177,180 @@ export const PORTFOLIO_CONTENT: ContentConfig = {
     availability: 'Available for Shopify theme & automation projects',
     availabilityBadge: 'Available',
     stack: ['Liquid', 'JavaScript', 'Tailwind CSS', 'Make.com', 'REST APIs'],
+  },
+
+  aboutMe: {
+    headline: 'Meet Mahar Ghulam Muhammad (GM)',
+    subheadline: 'Shopify Front-End Developer & E-Commerce Specialist based in Lahore, Pakistan',
+    tagline:
+      'Engineering clean Shopify 2.0 storefronts, modular Liquid sections, and automated workflows under the brand EzzCode.',
+    bioIntro:
+      "Hi! I'm Mahar Ghulam Muhammad (known as GM). I'm a specialized Shopify Front-End Developer and founder of EzzCode. I focus 100% on the Shopify ecosystem — engineering lightweight Online Store 2.0 themes, writing clean Liquid markup, integrating regional payment gateways, and streamlining back-office operations using Make.com webhooks and automations.",
+    bioFull: [
+      "My journey in e-commerce web development started with a clear observation: too many Shopify stores suffer from bloated apps, sluggish load speeds, and messy theme code that makes simple edits a nightmare for merchants. I decided to dedicate myself to mastering Shopify's core architecture — Liquid, JSON templates, section schemas, and native APIs.",
+      'I engineered and launched MAEVEN, an Online Store 2.0 commercial theme built completely from scratch with zero third-party app dependencies, modular drag-and-drop sections, and a native slide-out cart drawer, which has been sold directly to retail merchants on Gumroad.',
+      'In addition to independent theme engineering, I serve as a front-end developer for Imrozia Serene, a major fashion and apparel brand. There, I handle production theme customizations, multi-region payment and shipping logic, and automated 500+ weekly Cash on Delivery (COD) orders using Make.com and webhooks — saving hours of manual staff verification calls every single day.',
+      "Whether you're launching a new brand, upgrading to Shopify 2.0, adding bespoke custom sections to your active theme, or automating order fulfillment, I bring clean code, fast turnarounds, and direct, transparent communication.",
+    ],
+    quickStats: [
+      {
+        label: 'Platform Focus',
+        value: 'Shopify Only',
+        detail: '100% dedicated to Shopify 2.0 & Liquid architecture',
+      },
+      {
+        label: 'Commercial Theme',
+        value: '1 Built & Sold',
+        detail: 'MAEVEN OS 2.0 theme released on Gumroad',
+      },
+      {
+        label: 'COD Automation',
+        value: '500+ Weekly',
+        detail: 'Automated order verifications via Make.com scenarios',
+      },
+      {
+        label: 'Location & Response',
+        value: 'Lahore, PK',
+        detail: 'Direct developer support with under 24-hour reply time',
+      },
+    ],
+    specialties: [
+      {
+        title: 'Shopify 2.0 Theme Architecture',
+        badge: 'Core Competency',
+        description:
+          'Developing modular JSON templates, custom section schemas, and native cart drawers in clean Liquid without bloated external apps.',
+      },
+      {
+        title: 'Custom Section Development',
+        badge: 'Front-End Polish',
+        description:
+          'Crafting bespoke product page sections, variant pickers, size guides, tabbed content, and promotional banners editable from the theme customizer.',
+      },
+      {
+        title: 'Payment Gateway Integration',
+        badge: 'Checkout & Gateways',
+        description:
+          'Configuring regional payment gateways, seamless card transactions, webhook callback validation, and error-free checkout experiences.',
+      },
+      {
+        title: 'COD & E-Commerce Automation',
+        badge: 'Workflow Automation',
+        description:
+          'Eliminating manual order verification by connecting Shopify webhooks to Make.com scenarios, auto-tagging orders, and syncing courier statuses.',
+      },
+    ],
+    skillCategories: [
+      {
+        category: 'Shopify & Liquid',
+        skills: [
+          'Shopify Online Store 2.0',
+          'Liquid Templating',
+          'JSON Templates',
+          'Theme Customizer API',
+          'Metafields & Metaobjects',
+          'Section & Block Schemas',
+          'Native Cart Drawer',
+        ],
+      },
+      {
+        category: 'Front-End & Styling',
+        skills: [
+          'JavaScript (ES6+)',
+          'Tailwind CSS',
+          'Shopify Polaris Design System',
+          'HTML5 Semantic Markup',
+          'Modern CSS & Responsive Design',
+          'Mobile-First Layouts',
+          'Web Performance & a11y',
+        ],
+      },
+      {
+        category: 'Integrations & Automations',
+        skills: [
+          'Make.com (Integromat)',
+          'Shopify Webhooks',
+          'REST Admin APIs',
+          'Payment Gateway APIs',
+          'WhatsApp Business Messaging',
+          'Automated Order Tagging',
+        ],
+      },
+      {
+        category: 'Developer Tools & Workflow',
+        skills: [
+          'Git & GitHub',
+          'Shopify CLI',
+          'Theme Kit',
+          'Chrome DevTools',
+          'Figma to Shopify 2.0',
+          'Lighthouse Auditing',
+        ],
+      },
+    ],
+    experienceTimeline: [
+      {
+        period: '2024 – Present',
+        role: 'Shopify Front-End Developer & Founder',
+        company: 'EzzCode (Brand & Independent Practice)',
+        highlight: 'Custom Shopify 2.0 themes, bespoke section builds & automation flows',
+        details: [
+          'Built and released commercial Shopify 2.0 theme MAEVEN on Gumroad, achieving 96+ Lighthouse mobile score.',
+          'Developed bespoke storefront sections, product landing pages, and responsive UI for apparel and retail merchants.',
+          'Designed Make.com automation blueprints for automated order confirmation and customer messaging.',
+        ],
+      },
+      {
+        period: '2024 – Present',
+        role: 'In-House Front-End Developer',
+        company: 'Imrozia Serene (Fashion & Apparel)',
+        highlight: 'High-volume e-commerce storefront engineering & operations',
+        details: [
+          'Maintained and customized high-volume Liquid storefront serving multi-region retail traffic with zero downtime.',
+          'Integrated regional payment gateway for secure card processing and rule-based checkout routing.',
+          'Built Make.com COD webhook automation handling 500+ weekly orders, reducing manual verification calls by over 80%.',
+        ],
+      },
+      {
+        period: 'Recent Projects',
+        role: 'Storefront Setup & Launch',
+        company: 'Sahfa.pk & Tiny Todzz',
+        highlight: 'Turnkey launches and custom section design',
+        details: [
+          'Kickstarted Sahfa.pk apparel storefront powered by custom MAEVEN theme architecture.',
+          'Delivered turnkey Shopify 2.0 storefront setup for Tiny Todzz children’s apparel with mobile-first navigation.',
+        ],
+      },
+    ],
+    whyWorkWithMe: [
+      {
+        title: 'Zero App Bloat Philosophy',
+        description:
+          'I write clean native Liquid and CSS instead of stacking 15 monthly apps that degrade speed, conflict with theme code, and rack up expensive subscriptions.',
+      },
+      {
+        title: 'Real Production Experience',
+        description:
+          'I work on live high-traffic stores with real customer transactions, so I know how to test safely and avoid checkout disruptions.',
+      },
+      {
+        title: 'Direct Developer Collaboration',
+        description:
+          'You talk directly with me (GM) — no account managers, confusing tickets, or missed requirements. Fast replies on WhatsApp and email.',
+      },
+      {
+        title: 'Transparent Pricing & Scoping',
+        description:
+          'Clear upfront project milestones, transparent fixed rates or scopes, and step-by-step guidance before any work begins.',
+      },
+    ],
+    workingPrinciples: [
+      'Write clean, readable Liquid with schema-driven settings',
+      'Optimize for mobile shoppers first — over 75% of sales happen on phones',
+      'Prefer native Shopify features over unnecessary monthly recurring apps',
+      'Provide clear documentation on how merchants can update their own content',
+      'Keep store downtime at absolute zero during updates and launches',
+    ],
   },
 
   overviewStats: [

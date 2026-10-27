@@ -84,7 +84,30 @@ export const AdminShell: React.FC = () => {
         s.tagline.toLowerCase().includes(query) ||
         s.stack.some((st) => st.toLowerCase().includes(query)),
     );
+    const isAboutQuery =
+      query.includes('about') ||
+      query.includes('bio') ||
+      query.includes('gm') ||
+      query.includes('intro') ||
+      query.includes('who') ||
+      query.includes('mahar') ||
+      query.includes('ezzcode') ||
+      query.includes('skill') ||
+      query.includes('experience');
+
+    const aboutMatches = isAboutQuery
+      ? [
+          {
+            type: 'Profile',
+            title: 'About GM (Mahar Ghulam Muhammad)',
+            sub: 'Developer Bio, Skills & Experience',
+            url: '/about',
+          },
+        ]
+      : [];
+
     return [
+      ...aboutMatches,
       ...projMatches.map((p) => ({ type: 'Project', title: p.name, sub: p.client, url: '/projects' })),
       ...integMatches.map((i) => ({ type: 'Integration', title: i.name, sub: i.tagline, url: '/integrations' })),
       ...servMatches.map((s) => ({ type: 'Service', title: s.title, sub: s.tagline, url: '/services' })),
@@ -456,13 +479,14 @@ export const AdminShell: React.FC = () => {
 
                 <button
                   type="button"
-                  className={`sidebar-nav-item ${location.pathname === '/customers' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('/projects')}
+                  className={`sidebar-nav-item ${location.pathname === '/about' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('/about')}
                 >
                   <span className="sidebar-nav-item-left">
                     <span className="sidebar-nav-icon"><PersonIcon /></span>
-                    <span className="sidebar-nav-label">Customers</span>
+                    <span className="sidebar-nav-label">About Me</span>
                   </span>
+                  <span className="sidebar-nav-badge live">GM</span>
                 </button>
 
                 <button
@@ -740,6 +764,25 @@ export const AdminShell: React.FC = () => {
                 {developer.name} ({developer.brandName}) • Lahore, PK
               </div>
               <div style={{ display: 'flex', gap: '6px' }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleNavClick('/about');
+                    setShowNotificationPopup(false);
+                  }}
+                  style={{
+                    color: '#fff',
+                    background: '#2563eb',
+                    border: 'none',
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '10.5px',
+                    fontWeight: 600,
+                  }}
+                >
+                  About Me
+                </button>
                 <a
                   href={developer.whatsappUrl}
                   target="_blank"

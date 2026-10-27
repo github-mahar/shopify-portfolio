@@ -40,3 +40,10 @@ All project placeholders, deliverables, results, turnaround times, and verified 
 
 ## 5. Testimonials
 - [ ] **Real Merchant Reviews**: Kept `showTestimonials: false` in `src/data/content.ts` until reviews are gathered.
+
+## 6. Developer Intro & About Me
+- [x] **Developer Intro Spotlight Card**: Prominent introduction on Overview home page with bio, role, brand, status, and quick CTAs ✓
+- [x] **Dedicated About Me Page**: `/about` with narrative bio, 4 core specialties, technical skills matrix, career timeline, and why work with GM ✓
+- [x] **Sidebar Navigation**: "About Me" tab with PersonIcon and live GM badge ✓
+- [x] **Sidekick AI Integration**: Quick prompt pill "👤 About GM" and instant answers for intro/bio queries ✓
+- [x] **Account Row & Search**: Profile search results and direct link in account drawer ✓
