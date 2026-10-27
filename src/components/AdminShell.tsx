@@ -612,13 +612,13 @@ export const AdminShell: React.FC = () => {
                       target="_blank"
                       rel="noreferrer"
                       className="sidebar-nav-item"
-                      title="Live Client Storefront"
+                      title="Client Storefront (Inactive)"
                     >
                       <span className="sidebar-nav-item-left">
                         <span className="sidebar-nav-icon" style={{ color: '#38bdf8' }}>🧸</span>
                         <span className="sidebar-nav-label">Tiny Todzz</span>
                       </span>
-                      <span className="sidebar-nav-icon"><ExternalIcon /></span>
+                      <span className="sidebar-nav-badge">Inactive</span>
                     </a>
 
                     <a
