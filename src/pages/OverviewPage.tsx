@@ -235,7 +235,6 @@ export const OverviewPage: React.FC = () => {
             style={{ textDecoration: 'none' }}
           >
             <span>Hire on WhatsApp</span>
-            <span style={{ color: '#008060' }}>↗</span>
           </a>
         </div>
       </div>
@@ -408,7 +407,7 @@ export const OverviewPage: React.FC = () => {
               className="developer-strip-btn-secondary"
               onClick={() => navigate('/about')}
             >
-              About Me &amp; Story →
+              About Me
             </button>
             <button
               type="button"
@@ -423,7 +422,7 @@ export const OverviewPage: React.FC = () => {
               rel="noreferrer"
               className="developer-strip-btn-whatsapp"
             >
-              WhatsApp ↗
+              WhatsApp Chat
             </a>
           </div>
         </div>
