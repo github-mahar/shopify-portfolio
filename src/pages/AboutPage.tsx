@@ -10,275 +10,40 @@ import {
   BlockStack,
   InlineStack,
   InlineGrid,
-  Box,
   Divider,
   ProgressBar,
-  IndexTable,
-  Thumbnail,
 } from '@shopify/polaris';
 import {
-  PersonIcon,
-  StoreIcon,
   ChatIcon,
-  CodeIcon,
-  AutomationIcon,
-  ThemeIcon,
-  PaymentIcon,
-  CheckIcon,
   LocationIcon,
-  ClockIcon,
   EmailIcon,
+  PersonIcon,
 } from '@shopify/polaris-icons';
 import { PORTFOLIO_CONTENT } from '../data/content';
 
-/* ─── Stat Tile ─────────────────────────────────────────────── */
-interface StatTileProps {
-  label: string;
-  value: string;
-  detail: string;
-  tone?: 'success' | 'info' | 'warning' | 'critical';
-  badgeText?: string;
-}
-const StatTile: React.FC<StatTileProps> = ({ label, value, detail, tone, badgeText }) => (
-  <Card>
-    <BlockStack gap="150">
-      <InlineStack align="space-between" blockAlign="center">
-        <Text as="span" variant="bodySm" tone="subdued">
-          {label}
-        </Text>
-        {tone && badgeText && (
-          <Badge tone={tone} size="small">
-            {badgeText}
-          </Badge>
-        )}
-      </InlineStack>
-      <Text as="p" variant="headingLg" fontWeight="bold">
-        {value}
-      </Text>
-      <Text as="span" variant="bodySm" tone="subdued">
-        {detail}
-      </Text>
-    </BlockStack>
-  </Card>
-);
-
-/* ─── Lighthouse Dial ────────────────────────────────────────── */
-interface LighthouseDialProps {
-  label: string;
-  score: number;
-  color: string;
-}
-const LighthouseDial: React.FC<LighthouseDialProps> = ({ label, score, color }) => {
-  const r = 28;
-  const circ = 2 * Math.PI * r;
-  const dash = (score / 100) * circ;
-
-  return (
-    <Box
-      background="bg-surface-secondary"
-      padding="300"
-      borderRadius="200"
-      borderWidth="025"
-      borderColor="border"
-    >
-      <BlockStack gap="100" inlineAlign="center">
-        <svg width="72" height="72" viewBox="0 0 72 72">
-          <circle cx="36" cy="36" r={r} fill="none" stroke="#e4e5e7" strokeWidth="6" />
-          <circle
-            cx="36"
-            cy="36"
-            r={r}
-            fill="none"
-            stroke={color}
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeDasharray={`${dash} ${circ}`}
-            strokeDashoffset={circ / 4}
-            style={{ transition: 'stroke-dasharray 0.6s ease' }}
-          />
-          <text x="36" y="41" textAnchor="middle" fontSize="16" fontWeight="700" fill="#1a1a1a">
-            {score}
-          </text>
-        </svg>
-        <Text as="span" variant="bodySm" fontWeight="medium" alignment="center">
-          {label}
-        </Text>
-      </BlockStack>
-    </Box>
-  );
-};
-
-/* ─── Specialty Card ─────────────────────────────────────────── */
-interface SpecialtyCardProps {
-  icon: React.FC;
-  title: string;
-  description: string;
-  badge?: string;
-  metricLabel: string;
-  metricValue: string;
-}
-const SpecialtyCard: React.FC<SpecialtyCardProps> = ({
-  icon: IconComp,
-  title,
-  description,
-  badge,
-  metricLabel,
-  metricValue,
-}) => (
-  <Box
-    background="bg-surface-secondary"
-    padding="300"
-    borderRadius="200"
-    borderWidth="025"
-    borderColor="border"
-  >
-    <BlockStack gap="200">
-      <InlineStack align="space-between" blockAlign="center">
-        <InlineStack gap="200" blockAlign="center">
-          <div
-            style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '8px',
-              background: '#ffffff',
-              border: '1px solid #e3e3e3',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            <div style={{ width: '16px', height: '16px', color: '#303030' }}>
-              <IconComp />
-            </div>
-          </div>
-          <Text as="h3" variant="headingSm">
-            {title}
-          </Text>
-        </InlineStack>
-        {badge && <Badge size="small" tone="info">{badge}</Badge>}
-      </InlineStack>
-
-      <Text as="p" variant="bodySm" tone="subdued">
-        {description}
-      </Text>
-
-      <Divider />
-
-      <InlineStack align="space-between" blockAlign="center">
-        <Text as="span" variant="bodySm" tone="subdued">
-          {metricLabel}
-        </Text>
-        <Text as="span" variant="bodySm" fontWeight="semibold">
-          {metricValue}
-        </Text>
-      </InlineStack>
-    </BlockStack>
-  </Box>
-);
-
-/* ─── Principle Tile ─────────────────────────────────────────── */
-interface PrincipleTileProps {
-  title: string;
-  description: string;
-}
-const PrincipleTile: React.FC<PrincipleTileProps> = ({ title, description }) => (
-  <Box
-    background="bg-surface-secondary"
-    padding="300"
-    borderRadius="200"
-    borderWidth="025"
-    borderColor="border"
-  >
-    <InlineStack gap="200" blockAlign="start" wrap={false}>
-      <div
-        style={{
-          width: '20px',
-          height: '20px',
-          borderRadius: '50%',
-          background: '#e3f1df',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          marginTop: '2px',
-        }}
-      >
-        <div style={{ width: '12px', height: '12px', color: '#008060' }}>
-          <CheckIcon />
-        </div>
-      </div>
-      <BlockStack gap="050">
-        <Text as="span" variant="bodySm" fontWeight="semibold">
-          {title}
-        </Text>
-        <Text as="span" variant="bodySm" tone="subdued">
-          {description}
-        </Text>
-      </BlockStack>
-    </InlineStack>
-  </Box>
-);
-
-/* ─── Contact Row ────────────────────────────────────────────── */
-interface ContactRowProps {
-  icon: React.FC;
-  label: string;
-  value: string;
-}
-const ContactRow: React.FC<ContactRowProps> = ({ icon: IconComp, label, value }) => (
-  <InlineStack gap="200" blockAlign="center">
-    <div style={{ width: '16px', height: '16px', color: '#8c9196', flexShrink: 0 }}>
-      <IconComp />
-    </div>
-    <BlockStack gap="0">
-      <Text as="span" variant="bodySm" tone="subdued">
-        {label}
-      </Text>
-      <Text as="span" variant="bodyMd" fontWeight="semibold">
-        {value}
-      </Text>
-    </BlockStack>
-  </InlineStack>
-);
-
-/* ─── Main About Page ────────────────────────────────────────── */
 export const AboutPage: React.FC = () => {
   const navigate = useNavigate();
   const { developer } = PORTFOLIO_CONTENT;
 
-  const experienceRows = [
-    {
-      id: 'exp-1',
-      role: 'Shopify Front-End Developer',
-      brand: 'Imrozia Serene',
-      type: 'In-House Production',
-      impact: 'Zero-downtime catalog & 500+ weekly COD automations',
-      status: 'Active',
-      tone: 'success' as const,
-      thumb: '/assets/pakistan_store.jpg',
-    },
-    {
-      id: 'exp-2',
-      role: 'Theme Creator & Lead Engineer',
-      brand: 'MAEVEN OS 2.0 Theme',
-      type: 'Commercial Product',
-      impact: '96+ Lighthouse mobile score, sold on Gumroad',
-      status: 'Released',
-      tone: 'info' as const,
-      thumb: '/assets/holiday_rollouts.jpg',
-    },
-    {
-      id: 'exp-3',
-      role: 'Founder & Automation Specialist',
-      brand: 'EzzCode (Sahfa.pk & Tiny Todzz)',
-      type: 'Client Storefronts',
-      impact: 'Custom OS 2.0 builds, regional gateways & webhooks',
-      status: 'Active',
-      tone: 'success' as const,
-      thumb: '/assets/whatsapp_marketing.jpg',
-    },
-  ];
+  const pillStyle: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '5px',
+    padding: '4px 10px',
+    background: '#f6f6f7',
+    border: '1px solid #e3e5e7',
+    borderRadius: '14px',
+    fontSize: '11.5px',
+    fontWeight: 500,
+    color: '#303030',
+  };
+
+  const greenPillStyle: React.CSSProperties = {
+    ...pillStyle,
+    background: '#eef8f3',
+    borderColor: '#b5e4d3',
+    color: '#006e52',
+  };
 
   return (
     <Page
@@ -301,341 +66,554 @@ export const AboutPage: React.FC = () => {
       ]}
     >
       <BlockStack gap="400">
-        {/* ── Profile Hero Card ───────────────────────────────── */}
-        <Card>
-          <BlockStack gap="400">
-            <InlineStack align="space-between" blockAlign="start" gap="400" wrap>
-              {/* Avatar + Identity */}
-              <InlineStack gap="300" blockAlign="center">
-                <div
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '12px',
-                    background: '#1a1a1a',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    position: 'relative',
-                  }}
-                >
-                  <span style={{ color: '#ffffff', fontSize: '20px', fontWeight: 700 }}>GM</span>
-                  <div
-                    style={{
-                      width: '12px',
-                      height: '12px',
-                      borderRadius: '50%',
-                      background: '#00a47c',
-                      border: '2px solid white',
-                      position: 'absolute',
-                      bottom: '-2px',
-                      right: '-2px',
-                    }}
-                  />
-                </div>
-                <BlockStack gap="050">
-                  <InlineStack gap="200" blockAlign="center">
-                    <Text as="h1" variant="headingLg">
-                      GM (Mahar Ghulam Muhammad)
-                    </Text>
-                    <Badge tone="success">Available for Projects</Badge>
-                  </InlineStack>
-                  <Text as="p" variant="bodyMd" tone="subdued">
-                    Shopify Front-End Developer · Brand: EzzCode · Lahore, Pakistan
-                  </Text>
-                  <InlineStack gap="300" blockAlign="center">
-                    <InlineStack gap="100" blockAlign="center">
-                      <div style={{ width: '14px', height: '14px', color: '#8c9196' }}>
-                        <ClockIcon />
-                      </div>
-                      <Text as="span" variant="bodySm" tone="subdued">
-                        Direct reply &lt; 24h
-                      </Text>
-                    </InlineStack>
-                    <InlineStack gap="100" blockAlign="center">
-                      <div style={{ width: '14px', height: '14px', color: '#8c9196' }}>
-                        <ChatIcon />
-                      </div>
-                      <Text as="span" variant="bodySm" tone="subdued">
-                        WhatsApp: +92 349 4607275
-                      </Text>
-                    </InlineStack>
-                  </InlineStack>
-                </BlockStack>
-              </InlineStack>
-
-              {/* CTA Buttons */}
-              <InlineStack gap="200">
-                <Button variant="primary" onClick={() => navigate('/contact')}>
-                  Hire GM
-                </Button>
-                <Button url={developer.whatsappUrl} icon={ChatIcon}>
-                  WhatsApp Chat
-                </Button>
-              </InlineStack>
-            </InlineStack>
-
-            <Divider />
-
-            <Text as="p" variant="bodyMd">
-              {developer.pitch}
-            </Text>
-
-            {/* Tech stack badges */}
-            <InlineStack gap="150" wrap>
-              {[
-                'Shopify 2.0',
-                'Liquid',
-                'JSON Templates',
-                'Make.com',
-                'Cart Drawer',
-                'Metafields',
-                'Tailwind CSS',
-                'REST APIs',
-              ].map((tag) => (
-                <Badge key={tag} size="small">
-                  {tag}
-                </Badge>
-              ))}
-            </InlineStack>
-          </BlockStack>
-        </Card>
-
-        {/* ── 4 Visual Stat Cards ─────────────────────────────── */}
-        <InlineGrid columns={{ xs: 1, sm: 2, md: 4 }} gap="300">
-          <StatTile
-            label="Platform Focus"
-            value="Shopify Only"
-            detail="100% dedicated to OS 2.0 & Liquid"
-            tone="success"
-            badgeText="Specialized"
-          />
-          <StatTile
-            label="Commercial Theme"
-            value="MAEVEN OS 2.0"
-            detail="Built from scratch & sold on Gumroad"
-            tone="info"
-            badgeText="Live"
-          />
-          <StatTile
-            label="COD Automation"
-            value="500+ Weekly"
-            detail="Auto-verified via Make.com webhooks"
-            tone="success"
-            badgeText="Automated"
-          />
-          <StatTile
-            label="Response Time"
-            value="< 24 Hours"
-            detail="Direct developer, no agency layers"
-          />
-        </InlineGrid>
-
-        {/* ── Main 2-col Layout ───────────────────────────────── */}
         <Layout>
-          {/* Left 2/3 column */}
+          {/* Left 2/3 Column: Visual Artifacts */}
           <Layout.Section>
             <BlockStack gap="400">
-              {/* Verified Production Experience Table Artifact */}
-              <Card padding="0">
-                <Box padding="400" borderBlockEndWidth="025" borderColor="border">
-                  <InlineStack align="space-between" blockAlign="center">
-                    <BlockStack gap="050">
-                      <Text as="h2" variant="headingMd">
-                        Production Track Record &amp; Experience
-                      </Text>
-                      <Text as="p" variant="bodySm" tone="subdued">
-                        Active storefronts, commercial themes, and automation workflows engineered by GM.
-                      </Text>
-                    </BlockStack>
-                    <Button size="micro" onClick={() => navigate('/projects')}>
-                      All Case Studies
-                    </Button>
-                  </InlineStack>
-                </Box>
-                <IndexTable
-                  resourceName={{ singular: 'experience', plural: 'experiences' }}
-                  itemCount={experienceRows.length}
-                  selectable={false}
-                  headings={[
-                    { title: 'Storefront / Product' },
-                    { title: 'Role' },
-                    { title: 'Key Deliverable & Impact' },
-                    { title: 'Status' },
-                  ]}
-                >
-                  {experienceRows.map((row, index) => (
-                    <IndexTable.Row id={row.id} key={row.id} position={index}>
-                      <IndexTable.Cell>
-                        <InlineStack gap="300" blockAlign="center" wrap={false}>
-                          <Thumbnail source={row.thumb} alt={row.brand} size="small" />
-                          <BlockStack gap="050">
-                            <Text as="span" variant="bodyMd" fontWeight="semibold">
-                              {row.brand}
-                            </Text>
-                            <Text as="span" variant="bodySm" tone="subdued">
-                              {row.type}
-                            </Text>
-                          </BlockStack>
-                        </InlineStack>
-                      </IndexTable.Cell>
-                      <IndexTable.Cell>
-                        <Text as="span" variant="bodySm">
-                          {row.role}
-                        </Text>
-                      </IndexTable.Cell>
-                      <IndexTable.Cell>
-                        <Text as="span" variant="bodySm">
-                          {row.impact}
-                        </Text>
-                      </IndexTable.Cell>
-                      <IndexTable.Cell>
-                        <Badge tone={row.tone}>{row.status}</Badge>
-                      </IndexTable.Cell>
-                    </IndexTable.Row>
-                  ))}
-                </IndexTable>
-              </Card>
-
-              {/* Core Specializations Visual Grid */}
+              {/* ── Artifact 1: Developer Ecosystem & Architecture Map ── */}
               <Card>
                 <BlockStack gap="300">
                   <InlineStack align="space-between" blockAlign="center">
-                    <InlineStack gap="150" blockAlign="center">
-                      <div style={{ width: '18px', height: '18px', color: '#8c9196' }}>
-                        <StoreIcon />
-                      </div>
+                    <InlineStack gap="200" blockAlign="center">
+                      <span className="live-dot" style={{ display: 'inline-block' }} />
                       <Text as="h2" variant="headingMd">
-                        Core Engineering Deliverables
+                        Mahar Ghulam Muhammad (EzzCode)
                       </Text>
                     </InlineStack>
-                    <Badge tone="info">Shopify 2.0 Architecture</Badge>
+                    <Badge tone="success">100% Shopify Focus</Badge>
                   </InlineStack>
-                  <InlineGrid columns={{ xs: 1, md: 2 }} gap="300">
-                    <SpecialtyCard
-                      icon={ThemeIcon}
-                      title="Shopify 2.0 Theme Build"
-                      description="Lightweight OS 2.0 themes from Figma briefs with native cart drawer and drag-and-drop JSON sections."
-                      badge="Flagship"
-                      metricLabel="Lighthouse Target"
-                      metricValue="95+ Mobile"
-                    />
-                    <SpecialtyCard
-                      icon={CodeIcon}
-                      title="Custom Liquid Sections"
-                      description="Bespoke product sections, variant pickers, size guides, and promo blocks configurable in customizer."
-                      badge="Liquid"
-                      metricLabel="App Bloat Added"
-                      metricValue="0 Third-Party Apps"
-                    />
-                    <SpecialtyCard
-                      icon={PaymentIcon}
-                      title="Regional Payment Gateways"
-                      description="Local provider integrations with webhook callback validation and rule-based checkout routing."
-                      badge="Checkout"
-                      metricLabel="Transaction Reliability"
-                      metricValue="Webhook Verified"
-                    />
-                    <SpecialtyCard
-                      icon={AutomationIcon}
-                      title="COD Order Automation"
-                      description="Connecting Shopify webhooks to Make.com to auto-verify COD orders and sync courier tags."
-                      badge="Make.com"
-                      metricLabel="Manual Calls Saved"
-                      metricValue="80%+ Reduction"
-                    />
-                  </InlineGrid>
+
+                  {/* Studio Visual Artifact: Ecosystem Architecture Diagram */}
+                  <div
+                    style={{
+                      background: 'linear-gradient(180deg, #f8faf9 0%, #f1f5f3 100%)',
+                      borderRadius: '12px',
+                      padding: '20px',
+                      border: '1px solid #e6ece9',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                        gap: '12px',
+                        alignItems: 'stretch',
+                      }}
+                    >
+                      {/* Pillar 1 */}
+                      <div
+                        style={{
+                          background: '#ffffff',
+                          borderRadius: '10px',
+                          padding: '14px',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '8px',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span
+                            style={{
+                              width: '28px',
+                              height: '28px',
+                              borderRadius: '8px',
+                              background: '#eef8f3',
+                              color: '#008060',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontWeight: 700,
+                              fontSize: '13px',
+                            }}
+                          >
+                            OS
+                          </span>
+                          <span style={greenPillStyle}>Commercial</span>
+                        </div>
+                        <div style={{ fontSize: '13px', fontWeight: 650, color: '#111111' }}>
+                          Shopify 2.0 Themes
+                        </div>
+                        <div style={{ fontSize: '11.5px', color: '#616161', lineHeight: 1.4 }}>
+                          Author of <strong>MAEVEN</strong> • Modular JSON schemas &amp; native cart drawer
+                        </div>
+                      </div>
+
+                      {/* Pillar 2 */}
+                      <div
+                        style={{
+                          background: '#ffffff',
+                          borderRadius: '10px',
+                          padding: '14px',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '8px',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span
+                            style={{
+                              width: '28px',
+                              height: '28px',
+                              borderRadius: '8px',
+                              background: '#eef3fb',
+                              color: '#2c6ecb',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontWeight: 700,
+                              fontSize: '13px',
+                            }}
+                          >
+                            HQ
+                          </span>
+                          <span style={pillStyle}>In-House</span>
+                        </div>
+                        <div style={{ fontSize: '13px', fontWeight: 650, color: '#111111' }}>
+                          Imrozia Serene
+                        </div>
+                        <div style={{ fontSize: '11.5px', color: '#616161', lineHeight: 1.4 }}>
+                          High-volume fashion catalog • Multi-region checkout &amp; zero downtime
+                        </div>
+                      </div>
+
+                      {/* Pillar 3 */}
+                      <div
+                        style={{
+                          background: '#ffffff',
+                          borderRadius: '10px',
+                          padding: '14px',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '8px',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span
+                            style={{
+                              width: '28px',
+                              height: '28px',
+                              borderRadius: '8px',
+                              background: '#f3eefb',
+                              color: '#7e57c2',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontWeight: 700,
+                              fontSize: '13px',
+                            }}
+                          >
+                            ⚡
+                          </span>
+                          <span style={greenPillStyle}>500+ / wk</span>
+                        </div>
+                        <div style={{ fontSize: '13px', fontWeight: 650, color: '#111111' }}>
+                          Make.com Webhooks
+                        </div>
+                        <div style={{ fontSize: '11.5px', color: '#616161', lineHeight: 1.4 }}>
+                          Automated COD verification • -80% manual staff calls
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <InlineStack align="space-between" blockAlign="center" wrap gap="200">
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                      <span style={pillStyle}>📍 Lahore, Pakistan</span>
+                      <span style={pillStyle}>⚡ Clean Liquid (0 App Bloat)</span>
+                      <span style={pillStyle}>⏱️ Reply &lt; 24h</span>
+                    </div>
+                    <InlineStack gap="200">
+                      <Button size="micro" onClick={() => navigate('/projects')}>
+                        View Storefronts
+                      </Button>
+                      <Button size="micro" url={developer.whatsappUrl} icon={ChatIcon}>
+                        WhatsApp
+                      </Button>
+                    </InlineStack>
+                  </InlineStack>
                 </BlockStack>
               </Card>
 
-              {/* Lighthouse Performance Artifact */}
+              {/* ── Artifact 2: Interactive Theme Editor & Lighthouse Benchmark ── */}
               <Card>
                 <BlockStack gap="300">
                   <InlineStack align="space-between" blockAlign="center">
-                    <BlockStack gap="050">
-                      <Text as="h2" variant="headingMd">
-                        MAEVEN Theme — Lighthouse Benchmark
-                      </Text>
-                      <Text as="p" variant="bodySm" tone="subdued">
-                        Audit-verified performance of GM's commercial Online Store 2.0 theme with zero app dependencies.
-                      </Text>
-                    </BlockStack>
-                    <Badge tone="success">Audit Verified</Badge>
+                    <Text as="h2" variant="headingMd">
+                      MAEVEN OS 2.0 — Architecture &amp; Speed Artifact
+                    </Text>
+                    <Badge tone="success">96+ Mobile Score</Badge>
                   </InlineStack>
-                  <InlineGrid columns={{ xs: 2, sm: 4 }} gap="300">
-                    <LighthouseDial label="Performance" score={96} color="#008060" />
-                    <LighthouseDial label="Accessibility" score={98} color="#008060" />
-                    <LighthouseDial label="Best Practices" score={100} color="#008060" />
-                    <LighthouseDial label="SEO" score={100} color="#008060" />
+
+                  <InlineGrid columns={{ xs: 1, md: 2 }} gap="300">
+                    {/* Left Visual: Mini Shopify Theme Customizer Mockup */}
+                    <div
+                      style={{
+                        background: '#f8f9fa',
+                        borderRadius: '12px',
+                        border: '1px solid #e6e8eb',
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      {/* Browser Top Bar */}
+                      <div
+                        style={{
+                          background: '#ffffff',
+                          padding: '8px 12px',
+                          borderBottom: '1px solid #eceef0',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <div style={{ display: 'flex', gap: '5px' }}>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#e5e7eb' }} />
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#e5e7eb' }} />
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#e5e7eb' }} />
+                        </div>
+                        <span
+                          style={{
+                            fontSize: '10.5px',
+                            color: '#616161',
+                            background: '#f3f4f6',
+                            padding: '2px 10px',
+                            borderRadius: '10px',
+                            fontWeight: 500,
+                          }}
+                        >
+                          maeven-os2.myshopify.com
+                        </span>
+                        <span style={{ fontSize: '10px', color: '#008060', fontWeight: 600 }}>OS 2.0</span>
+                      </div>
+
+                      {/* Customizer Split View */}
+                      <div style={{ display: 'flex', flex: 1, padding: '12px', gap: '10px' }}>
+                        {/* Section Tree */}
+                        <div
+                          style={{
+                            width: '42%',
+                            background: '#ffffff',
+                            borderRadius: '8px',
+                            padding: '8px',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '5px',
+                            fontSize: '10.5px',
+                          }}
+                        >
+                          <div style={{ fontWeight: 600, color: '#111', marginBottom: '2px' }}>
+                            JSON Sections
+                          </div>
+                          <div style={{ padding: '4px 6px', background: '#eef8f3', color: '#006e52', borderRadius: '5px', fontWeight: 500 }}>
+                            ▾ Header &amp; Mega Menu
+                          </div>
+                          <div style={{ padding: '4px 6px', background: '#f6f6f7', color: '#303030', borderRadius: '5px' }}>
+                            ▪ Dynamic Hero Banner
+                          </div>
+                          <div style={{ padding: '4px 6px', background: '#f6f6f7', color: '#303030', borderRadius: '5px' }}>
+                            ▪ Ajax Filter Grid
+                          </div>
+                          <div style={{ padding: '4px 6px', background: '#eef8f3', color: '#006e52', borderRadius: '5px', fontWeight: 500 }}>
+                            ▪ Slide-Out Cart Drawer
+                          </div>
+                        </div>
+
+                        {/* Storefront Preview Canvas */}
+                        <div
+                          style={{
+                            flex: 1,
+                            background: '#ffffff',
+                            borderRadius: '8px',
+                            padding: '10px',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '8px',
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: '38px',
+                              borderRadius: '6px',
+                              background: 'linear-gradient(135deg, #e3f1df 0%, #d1fae5 100%)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '10.5px',
+                              fontWeight: 600,
+                              color: '#065f46',
+                            }}
+                          >
+                            Zero Third-Party App Bloat
+                          </div>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', flex: 1 }}>
+                            <div style={{ background: '#f3f4f6', borderRadius: '5px', padding: '6px', fontSize: '9.5px', color: '#4b5563' }}>
+                              Product Card
+                              <div style={{ fontWeight: 600, color: '#111', marginTop: '2px' }}>Quick Add +</div>
+                            </div>
+                            <div style={{ background: '#f3f4f6', borderRadius: '5px', padding: '6px', fontSize: '9.5px', color: '#4b5563' }}>
+                              Ajax Drawer
+                              <div style={{ fontWeight: 600, color: '#008060', marginTop: '2px' }}>Instant Sync</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Visual: 4 Circular Lighthouse Gauges */}
+                    <div
+                      style={{
+                        background: 'linear-gradient(180deg, #f8faf9 0%, #f1f5f3 100%)',
+                        borderRadius: '12px',
+                        border: '1px solid #e6ece9',
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        gap: '14px',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+                        {[
+                          { label: 'Speed', score: 96 },
+                          { label: 'A11y', score: 98 },
+                          { label: 'Best', score: 100 },
+                          { label: 'SEO', score: 100 },
+                        ].map((item) => {
+                          const r = 22;
+                          const circ = 2 * Math.PI * r;
+                          const dash = (item.score / 100) * circ;
+                          return (
+                            <div
+                              key={item.label}
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                gap: '5px',
+                              }}
+                            >
+                              <div
+                                style={{
+                                  background: '#ffffff',
+                                  borderRadius: '50%',
+                                  padding: '4px',
+                                  boxShadow: '0 4px 12px rgba(0, 128, 96, 0.10)',
+                                  display: 'flex',
+                                }}
+                              >
+                                <svg width="52" height="52" viewBox="0 0 54 54">
+                                  <circle cx="27" cy="27" r={r} fill="none" stroke="#e3f1df" strokeWidth="4.5" />
+                                  <circle
+                                    cx="27"
+                                    cy="27"
+                                    r={r}
+                                    fill="none"
+                                    stroke="#008060"
+                                    strokeWidth="4.5"
+                                    strokeLinecap="round"
+                                    strokeDasharray={`${dash} ${circ}`}
+                                    strokeDashoffset={circ / 4}
+                                  />
+                                  <text
+                                    x="27"
+                                    y="31"
+                                    textAnchor="middle"
+                                    fontSize="13"
+                                    fontWeight="700"
+                                    fill="#008060"
+                                  >
+                                    {item.score}
+                                  </text>
+                                </svg>
+                              </div>
+                              <span style={{ fontSize: '11px', fontWeight: 500, color: '#4a4a4a' }}>
+                                {item.label}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
+                        <span style={greenPillStyle}>FCP 0.8s</span>
+                        <span style={pillStyle}>LCP 1.4s</span>
+                        <span style={pillStyle}>CLS 0.00</span>
+                        <span style={pillStyle}>Sold on Gumroad</span>
+                      </div>
+                    </div>
                   </InlineGrid>
                 </BlockStack>
               </Card>
 
-              {/* Architecture & Guiding Principles Grid */}
+              {/* ── Artifact 3: Visual Make.com COD Automation Pipeline ── */}
               <Card>
                 <BlockStack gap="300">
-                  <InlineStack gap="150" blockAlign="center">
-                    <div style={{ width: '18px', height: '18px', color: '#8c9196' }}>
-                      <PersonIcon />
-                    </div>
+                  <InlineStack align="space-between" blockAlign="center">
                     <Text as="h2" variant="headingMd">
-                      Working Principles &amp; Architecture Standards
+                      Automated COD Verification Pipeline (Make.com)
                     </Text>
+                    <Badge tone="info">500+ Weekly Orders</Badge>
                   </InlineStack>
-                  <InlineGrid columns={{ xs: 1, sm: 2 }} gap="300">
-                    <PrincipleTile
-                      title="Zero App Bloat"
-                      description="Native Liquid & CSS instead of stacking 15 monthly apps that degrade speed."
-                    />
-                    <PrincipleTile
-                      title="Production Tested"
-                      description="Proven on high-traffic retail catalogs handling thousands of weekly orders."
-                    />
-                    <PrincipleTile
-                      title="Merchant Autonomy"
-                      description="Schema-driven sections so teams can launch campaigns without touching code."
-                    />
-                    <PrincipleTile
-                      title="Direct Developer Access"
-                      description="Fast communication via WhatsApp or email without agency middlemen."
-                    />
-                  </InlineGrid>
+
+                  {/* Visual Node Pipeline */}
+                  <div
+                    style={{
+                      background: 'linear-gradient(180deg, #fafafa 0%, #f3f4f6 100%)',
+                      borderRadius: '12px',
+                      padding: '18px 16px',
+                      border: '1px solid #e6e8eb',
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))',
+                      gap: '10px',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {[
+                      {
+                        step: '01',
+                        title: 'Shopify Checkout',
+                        sub: 'orders/create webhook',
+                        color: '#008060',
+                        bg: '#eef8f3',
+                      },
+                      {
+                        step: '02',
+                        title: 'Make.com Router',
+                        sub: 'COD & region filter',
+                        color: '#7e57c2',
+                        bg: '#f3eefb',
+                      },
+                      {
+                        step: '03',
+                        title: 'WhatsApp Prompt',
+                        sub: '1-tap buyer confirm',
+                        color: '#059669',
+                        bg: '#ecfdf5',
+                      },
+                      {
+                        step: '04',
+                        title: 'Admin REST API',
+                        sub: 'Auto-tag & dispatch',
+                        color: '#2c6ecb',
+                        bg: '#eef3fb',
+                      },
+                    ].map((node) => (
+                      <div
+                        key={node.step}
+                        style={{
+                          background: '#ffffff',
+                          borderRadius: '10px',
+                          padding: '12px',
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '4px',
+                        }}
+                      >
+                        <span
+                          style={{
+                            alignSelf: 'flex-start',
+                            fontSize: '10px',
+                            fontWeight: 700,
+                            padding: '2px 7px',
+                            borderRadius: '10px',
+                            background: node.bg,
+                            color: node.color,
+                          }}
+                        >
+                          STEP {node.step}
+                        </span>
+                        <div style={{ fontSize: '12.5px', fontWeight: 650, color: '#111111', marginTop: '2px' }}>
+                          {node.title}
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#616161' }}>{node.sub}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <InlineStack align="space-between" blockAlign="center" wrap gap="200">
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                      <span style={greenPillStyle}>-80% Manual Verification Calls</span>
+                      <span style={pillStyle}>Real-Time Courier Sync</span>
+                      <span style={pillStyle}>Regional Payment Gateways</span>
+                    </div>
+                    <Button size="micro" onClick={() => navigate('/integrations')}>
+                      Integration Details
+                    </Button>
+                  </InlineStack>
                 </BlockStack>
               </Card>
             </BlockStack>
           </Layout.Section>
 
-          {/* Right 1/3 Sidebar */}
+          {/* Right 1/3 Sidebar Column */}
           <Layout.Section variant="oneThird">
             <BlockStack gap="400">
-              {/* Direct Contact */}
+              {/* Direct Contact Visual Card */}
               <Card>
                 <BlockStack gap="300">
-                  <Text as="h2" variant="headingMd">
-                    Direct Contact
-                  </Text>
-                  <Text as="p" variant="bodySm" tone="subdued">
-                    Reach out directly to discuss theme builds, custom sections, or automations.
-                  </Text>
-                  <Divider />
-                  <BlockStack gap="200">
-                    <ContactRow icon={PersonIcon} label="Developer" value={developer.name} />
-                    <ContactRow icon={EmailIcon} label="Email" value={developer.email} />
-                    <ContactRow icon={ChatIcon} label="WhatsApp" value={developer.phone} />
-                    <ContactRow icon={LocationIcon} label="Location" value={`${developer.location} (PKT)`} />
-                    <Box>
-                      <BlockStack gap="100">
-                        <Text as="span" variant="bodySm" tone="subdued">
-                          Typical Response
-                        </Text>
-                        <InlineStack>
-                          <Badge tone="success">&lt; 24 hours</Badge>
-                        </InlineStack>
-                      </BlockStack>
-                    </Box>
-                  </BlockStack>
-                  <Divider />
+                  <InlineStack align="space-between" blockAlign="center">
+                    <Text as="h2" variant="headingMd">
+                      Direct Contact
+                    </Text>
+                    <Badge tone="success">&lt; 24h Reply</Badge>
+                  </InlineStack>
+
+                  <div
+                    style={{
+                      background: '#f8f9fa',
+                      borderRadius: '10px',
+                      padding: '12px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                    }}
+                  >
+                    {[
+                      { icon: PersonIcon, label: 'Developer', value: 'Mahar Ghulam Muhammad' },
+                      { icon: EmailIcon, label: 'Email', value: developer.email },
+                      { icon: ChatIcon, label: 'WhatsApp', value: developer.phone },
+                      { icon: LocationIcon, label: 'Location', value: 'Lahore, Pakistan (PKT)' },
+                    ].map(({ icon: IconComp, label, value }) => (
+                      <div
+                        key={label}
+                        style={{
+                          background: '#ffffff',
+                          borderRadius: '8px',
+                          padding: '8px 10px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '10px',
+                          boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                        }}
+                      >
+                        <div style={{ width: '16px', height: '16px', color: '#008060', flexShrink: 0 }}>
+                          <IconComp />
+                        </div>
+                        <div style={{ minWidth: 0, flex: 1 }}>
+                          <div style={{ fontSize: '10.5px', color: '#616161' }}>{label}</div>
+                          <div
+                            style={{
+                              fontSize: '12px',
+                              fontWeight: 600,
+                              color: '#111111',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
+                            {value}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
                   <Button variant="primary" fullWidth onClick={() => navigate('/contact')}>
                     Open Project Scoping Form
                   </Button>
@@ -645,17 +623,18 @@ export const AboutPage: React.FC = () => {
                 </BlockStack>
               </Card>
 
-              {/* Technical Proficiency Progress Bars Artifact */}
+              {/* Technical Stack Visual Bars */}
               <Card>
                 <BlockStack gap="300">
                   <Text as="h2" variant="headingMd">
-                    Core Stack Breakdown
+                    Technical Stack Matrix
                   </Text>
+
                   <BlockStack gap="200">
                     <BlockStack gap="100">
                       <InlineStack align="space-between">
                         <Text as="span" variant="bodySm" fontWeight="medium">
-                          Shopify Liquid &amp; OS 2.0 Schemas
+                          Shopify Liquid &amp; OS 2.0
                         </Text>
                         <Text as="span" variant="bodySm" tone="subdued">
                           100%
@@ -667,7 +646,7 @@ export const AboutPage: React.FC = () => {
                     <BlockStack gap="100">
                       <InlineStack align="space-between">
                         <Text as="span" variant="bodySm" fontWeight="medium">
-                          JavaScript (ES6+) &amp; Tailwind CSS
+                          JavaScript ES6+ &amp; Tailwind
                         </Text>
                         <Text as="span" variant="bodySm" tone="subdued">
                           95%
@@ -679,7 +658,7 @@ export const AboutPage: React.FC = () => {
                     <BlockStack gap="100">
                       <InlineStack align="space-between">
                         <Text as="span" variant="bodySm" fontWeight="medium">
-                          Make.com &amp; Webhook Automation
+                          Make.com &amp; Webhooks
                         </Text>
                         <Text as="span" variant="bodySm" tone="subdued">
                           92%
@@ -691,7 +670,7 @@ export const AboutPage: React.FC = () => {
                     <BlockStack gap="100">
                       <InlineStack align="space-between">
                         <Text as="span" variant="bodySm" fontWeight="medium">
-                          Payment Gateways &amp; REST APIs
+                          Gateways &amp; REST APIs
                         </Text>
                         <Text as="span" variant="bodySm" tone="subdued">
                           90%
@@ -703,58 +682,20 @@ export const AboutPage: React.FC = () => {
 
                   <Divider />
 
-                  <InlineStack gap="150" wrap>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {[
-                      'Shopify CLI',
-                      'Theme Kit',
-                      'Git & GitHub',
-                      'Figma to Liquid',
+                      'JSON Schemas',
                       'Metafields',
                       'Ajax Cart API',
-                    ].map((tool) => (
-                      <Badge key={tool} size="small">
-                        {tool}
-                      </Badge>
+                      'Shopify CLI',
+                      'Git & GitHub',
+                      'Figma to Liquid',
+                    ].map((tag) => (
+                      <span key={tag} style={pillStyle}>
+                        {tag}
+                      </span>
                     ))}
-                  </InlineStack>
-                </BlockStack>
-              </Card>
-
-              {/* Featured Product Card with Visual Preview */}
-              <Card>
-                <BlockStack gap="300">
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '130px',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      border: '1px solid #e3e3e3',
-                    }}
-                  >
-                    <img
-                      src="/assets/holiday_rollouts.jpg"
-                      alt="MAEVEN OS 2.0 Theme"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
                   </div>
-                  <InlineStack align="space-between" blockAlign="center">
-                    <Text as="h3" variant="headingSm">
-                      MAEVEN OS 2.0 Theme
-                    </Text>
-                    <Badge tone="success">Gumroad</Badge>
-                  </InlineStack>
-                  <Text as="p" variant="bodySm" tone="subdued">
-                    Commercial Shopify 2.0 theme engineered with modular Liquid schemas and native slide-out cart drawer.
-                  </Text>
-                  <InlineStack gap="200">
-                    <Button size="micro" onClick={() => navigate('/themes')}>
-                      View Specs
-                    </Button>
-                    <Button size="micro" url="https://mahargm.gumroad.com/l/maeven">
-                      Gumroad Listing
-                    </Button>
-                  </InlineStack>
                 </BlockStack>
               </Card>
             </BlockStack>
