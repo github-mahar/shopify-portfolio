@@ -44,6 +44,67 @@ export const AdminShell: React.FC = () => {
   // Notification state
   const [showNotificationPopup, setShowNotificationPopup] = useState(false);
 
+  // Dynamic Per-Route SEO Title, Description & Canonical Updater
+  useEffect(() => {
+    const seoMap: Record<string, { title: string; description: string }> = {
+      '/': {
+        title: 'Mahar Ghulam Muhammad (GM) • EzzCode — Shopify 2.0 Front-End & Automation Developer',
+        description:
+          'Mahar Ghulam Muhammad (GM) — Founder of EzzCode in Lahore, Pakistan. Specialized Shopify Online Store 2.0 Front-End Developer, creator of the MAEVEN OS 2.0 theme, and Make.com COD automation specialist.',
+      },
+      '/about': {
+        title: 'About Mahar Ghulam Muhammad (GM) • EzzCode — Shopify Developer Profile',
+        description:
+          'Meet Mahar Ghulam Muhammad (GM), Shopify 2.0 Front-End & Automation Developer in Lahore, Pakistan. Creator of MAEVEN OS 2.0 theme, Imrozia Serene developer, and Make.com workflow engineer.',
+      },
+      '/projects': {
+        title: 'Shopify Projects & Live Client Storefronts • GM (EzzCode)',
+        description:
+          'Verified Shopify Online Store 2.0 builds and case studies by Mahar Ghulam Muhammad (GM): Imrozia Serene, MAEVEN Theme, Sahfa.pk, Tiny Todzz, and Make.com COD automations.',
+      },
+      '/themes': {
+        title: 'MAEVEN OS 2.0 Theme & Custom Liquid Architecture • GM (EzzCode)',
+        description:
+          'Explore MAEVEN — a commercial Shopify Online Store 2.0 theme built from scratch with modular JSON schemas, native slide-out cart drawer, zero app bloat, and a 96+ Lighthouse mobile score.',
+      },
+      '/integrations': {
+        title: 'Make.com COD Automation & Shopify Payment Gateways • GM (EzzCode)',
+        description:
+          'Automated Cash on Delivery (COD) order verification (500+ weekly orders) via Make.com webhooks, WhatsApp confirmations, and regional payment gateway integrations for Shopify.',
+      },
+      '/services': {
+        title: 'Shopify 2.0 Development & Automation Services • GM (EzzCode)',
+        description:
+          'Hire Mahar Ghulam Muhammad (GM) for custom Shopify 2.0 theme builds, bespoke Liquid sections, speed optimization, regional payment gateways, and Make.com COD workflows.',
+      },
+      '/contact': {
+        title: 'Hire GM • Project Scoping & Direct Contact — EzzCode Shopify Developer',
+        description:
+          'Scope your Shopify 2.0 theme, custom Liquid section, or Make.com automation project directly with Mahar Ghulam Muhammad (GM) via WhatsApp (+92 349 4607275) or email.',
+      },
+    };
+
+    const currentSeo = seoMap[location.pathname] || seoMap['/'];
+    document.title = currentSeo.title;
+
+    const setMeta = (selector: string, content: string) => {
+      const el = document.querySelector<HTMLMetaElement>(selector);
+      if (el) el.setAttribute('content', content);
+    };
+
+    setMeta('meta[name="title"]', currentSeo.title);
+    setMeta('meta[name="description"]', currentSeo.description);
+    setMeta('meta[property="og:title"]', currentSeo.title);
+    setMeta('meta[property="og:description"]', currentSeo.description);
+    setMeta('meta[name="twitter:title"]', currentSeo.title);
+    setMeta('meta[name="twitter:description"]', currentSeo.description);
+
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (canonical && typeof window !== 'undefined') {
+      canonical.setAttribute('href', `${window.location.origin}${location.pathname}`);
+    }
+  }, [location.pathname]);
+
   // Ctrl+K / Cmd+K listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
